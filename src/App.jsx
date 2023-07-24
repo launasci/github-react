@@ -1,9 +1,14 @@
+import { useState } from 'react'
+import ProfileAvatar from "./components/ProfileAvatar"
 import SearchBox from "./components/SearchBox"
 
 function App() {
+  const [user, setUser] = useState(null)
+
   return (
     <>
-      <SearchBox /> 
+      {user && <ProfileAvatar user={user}/>}
+      <SearchBox setUser={setUser}/> 
     </>
   )
 }

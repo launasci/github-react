@@ -1,4 +1,4 @@
-// import './ListRepos.css';
+import './ListRepos.css';
 
 export default function ListRepos({ repos }) {
   return (
@@ -7,7 +7,7 @@ export default function ListRepos({ repos }) {
         repos.map((repo) => {
           return (
             <div className="list-repos-container" key={repo.id}>
-              <p>{repo.name}</p>
+              <p className='list-repos-repo-name'>{repo.name}</p>
             </div>
           )
         })

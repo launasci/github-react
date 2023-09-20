@@ -32,7 +32,6 @@ export default function ListRepos({ user, repos }) {
     <div>
       {repos.map((repo) => {
         const isExpanded = repo === expandedRepo;
-        console.log('isExpanded', isExpanded)
 
         return (
           <div className="list-repos-container" key={repo.id}>

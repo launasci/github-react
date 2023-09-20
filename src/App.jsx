@@ -29,7 +29,7 @@ function App() {
     <>
       {user && <ProfileAvatar user={user}/>}
       <SearchBox setUser={setUser} />
-      {repos.length ? <ListRepos repos={repos} /> : null}
+      {repos.length ? <ListRepos repos={repos} user={user}/> : null}
     </>
   )
 }

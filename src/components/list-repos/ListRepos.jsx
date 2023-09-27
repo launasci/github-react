@@ -1,5 +1,6 @@
 
 import { DownCircleOutlined, UpCircleOutlined} from '@ant-design/icons';
+import { Tag, Card } from 'antd';
 import ReposDetails from '../repo-details/ReposDetails';
 
 import { useState, useEffect } from 'react'
@@ -12,8 +13,8 @@ export default function ListRepos({ user, repos }) {
   const [expandedRepo, setExpandedRepo] = useState(null);
 
   const getRepoDetails = async (repo) => {
-    try {
-      const apirepoDetails = await api.listContent(user.login, repo.name, ''); // Remova 'repo.file'
+        try {
+      const apirepoDetails = await api.listContent(user.login, repo.name);
       if (apirepoDetails) {
         setRepoDetails(apirepoDetails);
       }
@@ -32,23 +33,26 @@ export default function ListRepos({ user, repos }) {
     <div>
       {repos.map((repo) => {
         const isExpanded = repo === expandedRepo;
-
         return (
-          <div className="list-repos-container" key={repo.id}>
-            <p className='list-repos-repo-name'>{repo.name}</p>
-            {
-              isExpanded ? (
-                <UpCircleOutlined 
-                  onClick={ () => setExpandedRepo(null)}
-              />
-              ) : (
-                <DownCircleOutlined
-                  onClick={() => setExpandedRepo(isExpanded ? null : repo)}
-                />
-              )
-            }
-            {isExpanded && <ReposDetails repos={repoDetails} />}
-          </div>
+          <Card>
+            <div className="list-repos-container" key={repo.id}>
+              <div>
+                  <p className='list-repos-repo-name'>{repo.name}</p>
+                  {
+                    isExpanded ? (
+                      <UpCircleOutlined onClick={ () => setExpandedRepo(null)} /> 
+                      ) : (
+                      <DownCircleOutlined 
+                        onClick={() => setExpandedRepo(isExpanded ? null : repo)}
+                        />
+                      )
+                  }
+                  <Tag color="default">{repo.language}</Tag>
+                  <Tag color="default">{repo.visibility}</Tag>
+              </div>
+              {isExpanded && <ReposDetails repos={repoDetails} />}
+            </div>
+          </Card>
         );
       })}
     </div>
